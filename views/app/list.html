@@ -1,0 +1,42 @@
+<Body:>
+    <div class="row">
+        <div class="span4">
+            <div class="well">
+                Hello, {_session.userData.User.FirstName} {_session.userData.User.LastName}!
+                <div>
+                    {_session.userData.User.Email}
+                </div>
+                <div>{_session.userData.User.PersonalId}</div>
+            </div>
+        </div>
+        <div class="span7 offset1">
+            {#each _page.games}
+            <app:game>
+            {/}
+        </div>
+    </div>
+
+<game:>
+    <h5>{.name}</h5>
+    {#each .info.outcome_sets[0].outcome_set}
+    <app:ocs>
+    {/}
+
+<ocs:>
+    <div>
+        {#if equal(.$.blocked, "1")}
+        <span style="color: #d3d3d3">{..$.name}</span>
+        {else}
+        <span>{.$.name}</span>
+        {/}
+        {#each .outcomes[0].outcome}
+        <app:oc blocked="{...$.blocked}">
+        {/}
+    </div>
+
+<oc:>
+    {#if equal(@blocked, '0')}
+    <button x-bind="click: placeticket">{..$.odds}</button>
+    {else}
+    <button disabled>{.$.odds}</button>
+    {/}

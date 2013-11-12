@@ -1,0 +1,3 @@
+redis-cli FLUSHALL
+rm -rf /projects/nordic-derby/mongo-data/*
+mongod --dbpath /projects/nordic-derby/mongo-data
